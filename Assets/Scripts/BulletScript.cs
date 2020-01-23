@@ -10,6 +10,10 @@ public class BulletScript : MonoBehaviour
 
  void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.tag.CompareTo("Enemy") == 0)
+        {
+            Debug.Log("Hit Enemy");
+        }
         Destroy(gameObject);
     }
 

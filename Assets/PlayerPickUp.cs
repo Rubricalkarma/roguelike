@@ -16,10 +16,10 @@ public class PlayerPickUp : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log("Collision");
-        if (collision.gameObject.name.CompareTo("Coin") == 0)
+        if (collision.gameObject.tag.CompareTo("Coin") == 0)
         {
             Debug.Log("Touch Coin");
-
+            playerStats.shootSpeed *= 2;
             Destroy(collision.gameObject);
         }
     }

@@ -25,7 +25,7 @@ public class Shooting : MonoBehaviour
         if (Input.GetButton("Fire1") && Time.time > nextShoot)
         {
             //Debug.Log(Time.time);
-            nextShoot = Time.time + (playerStats.shootSpeed);
+            nextShoot = Time.time + (1/playerStats.shootSpeed);
             Shoot();
         } 
     }
