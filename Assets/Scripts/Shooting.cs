@@ -8,14 +8,14 @@ public class Shooting : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
 
-    public float bulletForce = 10f;
-    public float range = 5f;
-    public float shootSpeed = .1f;
 
+
+    PlayerStats playerStats;
     float nextShoot = 0f;
     // Start is called before the first frame update
     void Start()
     {
+        playerStats = gameObject.GetComponentInParent<PlayerStats>();
         
     }
 
@@ -25,7 +25,7 @@ public class Shooting : MonoBehaviour
         if (Input.GetButton("Fire1") && Time.time > nextShoot)
         {
             //Debug.Log(Time.time);
-            nextShoot = Time.time + shootSpeed;
+            nextShoot = Time.time + (playerStats.shootSpeed);
             Shoot();
         } 
     }
@@ -35,8 +35,8 @@ public class Shooting : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         BulletScript bs = bullet.GetComponent<BulletScript>();
-        bs.range = range;
+        bs.range = playerStats.range;
         bs.startPos = firePoint;
-        rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+        rb.AddForce(firePoint.up * playerStats.bulletForce, ForceMode2D.Impulse);
     }
 }

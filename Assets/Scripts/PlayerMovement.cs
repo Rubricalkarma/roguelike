@@ -36,14 +36,4 @@ public class PlayerMovement : MonoBehaviour
    
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("Collision");
-        if (collision.gameObject.name.CompareTo("Coin") == 0)
-        {
-            Debug.Log("Touch Coin");
-            Destroy(collision.gameObject);
-        }
-    }
-
 }
