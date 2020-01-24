@@ -15,7 +15,7 @@ public class BulletScript : MonoBehaviour
         {
             Debug.Log("Hit Enemy");
             // Debug.Log(collision.gameObject.GetComponent<EnemyStats>().currentHP);
-            collision.gameObject.GetComponent<takeDamage>().recieveDamage(damage);
+            collision.gameObject.GetComponent<Entity>().recieveDamage(damage);
         }
         Destroy(gameObject);
         
