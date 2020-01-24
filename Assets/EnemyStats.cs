@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class EnemyStats : MonoBehaviour
 {
 
-    public float bulletForce = 10f;
-    public float range = 5f;
-    public float shootSpeed = .5f;
+    public float hp = 30f;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +13,9 @@ public class PlayerStats : MonoBehaviour
         
     }
 
-
-
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }

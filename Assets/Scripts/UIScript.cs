@@ -9,6 +9,7 @@ public class UIScript : MonoBehaviour
 
     public GameObject player;
     public TextMeshProUGUI attackSpeedText;
+    public TextMeshProUGUI healthText;
 
     PlayerStats playerStats;
    
@@ -26,5 +27,6 @@ public class UIScript : MonoBehaviour
     void Update()
     {
        attackSpeedText.text =  "Shoot Speed: " + playerStats.shootSpeed;
+        healthText.text = "HP: " + playerStats.currentHP + "/" + playerStats.maxHP;
     }
 }

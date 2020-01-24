@@ -37,6 +37,7 @@ public class Shooting : MonoBehaviour
         BulletScript bs = bullet.GetComponent<BulletScript>();
         bs.range = playerStats.range;
         bs.startPos = firePoint;
+        bs.damage = 10f;
         rb.AddForce(firePoint.up * playerStats.bulletForce, ForceMode2D.Impulse);
     }
 }

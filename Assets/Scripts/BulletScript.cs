@@ -7,6 +7,7 @@ public class BulletScript : MonoBehaviour
 
     public float range;
     public Transform startPos;
+    public float damage;
 
  void OnCollisionEnter2D(Collision2D collision)
     {
@@ -15,6 +16,7 @@ public class BulletScript : MonoBehaviour
             Debug.Log("Hit Enemy");
         }
         Destroy(gameObject);
+        
     }
 
     void Update()
