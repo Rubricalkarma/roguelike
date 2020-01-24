@@ -17,10 +17,6 @@ public class UIScript : MonoBehaviour
     void Start()
     {
        playerStats = player.GetComponent<PlayerStats>();
-        if(playerStats == null)
-        {
-            Debug.LogError("Couldn't find playerstats");
-        }
     }
 
     // Update is called once per frame

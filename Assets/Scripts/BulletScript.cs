@@ -14,6 +14,8 @@ public class BulletScript : MonoBehaviour
         if (collision.gameObject.tag.CompareTo("Enemy") == 0)
         {
             Debug.Log("Hit Enemy");
+            // Debug.Log(collision.gameObject.GetComponent<EnemyStats>().currentHP);
+            collision.gameObject.GetComponent<takeDamage>().recieveDamage(damage);
         }
         Destroy(gameObject);
         

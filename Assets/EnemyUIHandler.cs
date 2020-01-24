@@ -8,7 +8,7 @@ public class EnemyUIHandler : MonoBehaviour
 
     public Text hp;
     public GameObject enemy;
-    public Camera cam;
+    public GameObject hpBar;
 
     EnemyStats stats;
     // Start is called before the first frame update
@@ -20,7 +20,7 @@ public class EnemyUIHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hp.text = "HELLO"+stats.hp;
-        hp.transform.position = cam.WorldToScreenPoint(enemy.transform.position);
+        hp.text = ""+stats.currentHP;
+        hpBar.transform.localScale = new Vector3(stats.currentHP / stats.maxHP,1,1);
     }
 }

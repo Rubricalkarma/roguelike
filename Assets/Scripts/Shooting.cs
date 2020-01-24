@@ -15,6 +15,8 @@ public class Shooting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Physics.IgnoreLayerCollision(8, 8);
+       // Physics2D.IgnoreLayerCollision();
         playerStats = gameObject.GetComponentInParent<PlayerStats>();
         
     }

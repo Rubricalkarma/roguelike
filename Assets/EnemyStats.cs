@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemyStats : MonoBehaviour
 {
 
-    public float hp = 30f;
+    public float currentHP = 100f;
+    public float maxHP = 100f;
 
     // Start is called before the first frame update
     void Start()
