@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BulletScript : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class BulletScript : MonoBehaviour
     public float range;
     public Transform startPos;
     public float damage;
+    public GameObject textPrefab;
 
  void OnCollisionEnter2D(Collision2D collision)
     {
@@ -17,6 +19,9 @@ public class BulletScript : MonoBehaviour
             // Debug.Log(collision.gameObject.GetComponent<EnemyStats>().currentHP);
             collision.gameObject.GetComponent<Entity>().recieveDamage(damage);
         }
+        
+        GameObject text = Instantiate(textPrefab, transform.position, Quaternion.identity);
+        text.GetComponent<FloatingTextScript>().setText("" + damage);
         Destroy(gameObject);
         
     }

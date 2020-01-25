@@ -145,3 +145,5 @@ MonoBehaviour:
   range: 0
   startPos: {fileID: 0}
   damage: 0
+  textPrefab: {fileID: 7950664483853056879, guid: d9e8eca853a992e4399d6b2ed3e3d174,
+    type: 3}
