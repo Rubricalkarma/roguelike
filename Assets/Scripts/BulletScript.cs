@@ -14,6 +14,7 @@ public class BulletScript : MonoBehaviour
 
  void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Collision");
         if (collision.gameObject.GetComponent<Entity>().entityName.CompareTo(sourceEntity.entityName) != 0)
         {
             //if (collision.gameObject.tag.CompareTo("Enemy") == 0)

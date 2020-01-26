@@ -22,7 +22,7 @@ public class EnemyAI : MonoBehaviour
 
     void Shoot()
     {
-        Debug.Log("Shooting");
+        //Debug.Log("Shooting");
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         BulletScript bs = bullet.GetComponent<BulletScript>();
@@ -37,7 +37,7 @@ public class EnemyAI : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("Coroutine");
+            //Debug.Log("Coroutine");
             Shoot();
             yield return new WaitForSeconds(1f);
         }
