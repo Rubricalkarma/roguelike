@@ -10,19 +10,31 @@ public class BulletScript : MonoBehaviour
     public Transform startPos;
     public float damage;
     public GameObject textPrefab;
+    public Entity sourceEntity;
 
  void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag.CompareTo("Enemy") == 0)
+        if (collision.gameObject.GetComponent<Entity>().entityName.CompareTo(sourceEntity.entityName) != 0)
         {
-            Debug.Log("Hit Enemy");
-            // Debug.Log(collision.gameObject.GetComponent<EnemyStats>().currentHP);
-            collision.gameObject.GetComponent<Entity>().recieveDamage(damage);
+            //if (collision.gameObject.tag.CompareTo("Enemy") == 0)
+            //{
+                Debug.Log("Hit Enemy");
+                // Debug.Log(collision.gameObject.GetComponent<EnemyStats>().currentHP);
+                collision.gameObject.GetComponent<Entity>().recieveDamage(damage);
+
+                GameObject text = Instantiate(textPrefab, transform.position, Quaternion.identity);
+                text.GetComponent<FloatingTextScript>().setText("" + damage);
+
+           // }
+
+            Destroy(gameObject);
+        }
+        else
+        {
+            Debug.Log("Poggers hit self");
         }
         
-        GameObject text = Instantiate(textPrefab, transform.position, Quaternion.identity);
-        text.GetComponent<FloatingTextScript>().setText("" + damage);
-        Destroy(gameObject);
+        
         
     }
 

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class takeDamage : MonoBehaviour
 {
-    EnemyStats es;
+    Entity entity;
     // Start is called before the first frame update
     void Start()
     {
-        es = gameObject.GetComponentInParent<EnemyStats>();    
+        entity = gameObject.GetComponentInParent<Entity>();    
     }
 
     // Update is called once per frame
@@ -20,8 +20,8 @@ public class takeDamage : MonoBehaviour
     public void recieveDamage(float damage)
     {
         //Debug.Log("Deal damage");
-        es.currentHP -= damage;
-        if(es.currentHP <= 0)
+        entity.currentHP -= damage;
+        if(entity.currentHP <= 0)
         {
             Debug.Log("Destorying ");
             Destroy(gameObject);

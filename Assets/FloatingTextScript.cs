@@ -20,8 +20,16 @@ public void setText(string text)
 
     IEnumerator fade()
     {
-        yield return new WaitForSeconds(1f);
+        
 
+        for(float i = 1f; i > 0; i -= .01f)
+        {
+            Color temp = dmgText.color;
+            temp.a = i;
+            dmgText.color = temp;
+            yield return new WaitForSeconds(.01f);
+
+        }
         //TODO set alpha script
         //dmgText.color.a = .5;
         Destroy(gameObject);

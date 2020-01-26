@@ -2,45 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooting : MonoBehaviour
+public class EnemyAI : MonoBehaviour
 {
 
     public Transform firePoint;
     public GameObject bulletPrefab;
 
-
-
-    Entity thisEntity;
-    float nextShoot = 0f;
     // Start is called before the first frame update
     void Start()
     {
-        // Physics.IgnoreLayerCollision(8, 8);
-       // Physics2D.IgnoreLayerCollision();
-       thisEntity = gameObject.GetComponentInParent<Entity>();
-        
+        StartCoroutine(shootBegin());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Fire1") && Time.time > nextShoot)
-        {
-            //Debug.Log(Time.time);
-            nextShoot = Time.time + (1/thisEntity.attackSpeed);
-            Shoot();
-        } 
+       
     }
 
     void Shoot()
     {
+        Debug.Log("Shooting");
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         BulletScript bs = bullet.GetComponent<BulletScript>();
-        bs.range = thisEntity.range;
+        bs.range = 10;
         bs.startPos = firePoint;
         bs.damage = 10f;
         bs.sourceEntity = gameObject.GetComponentInParent<Entity>();
-        rb.AddForce(firePoint.up * thisEntity.bulletForce, ForceMode2D.Impulse);
+        rb.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
+    }
+
+    public IEnumerator shootBegin()
+    {
+        while (true)
+        {
+            Debug.Log("Coroutine");
+            Shoot();
+            yield return new WaitForSeconds(1f);
+        }
     }
 }

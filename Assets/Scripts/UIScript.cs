@@ -11,18 +11,18 @@ public class UIScript : MonoBehaviour
     public TextMeshProUGUI attackSpeedText;
     public TextMeshProUGUI healthText;
 
-    PlayerStats playerStats;
+    Entity e;
    
     // Start is called before the first frame update
     void Start()
     {
-       playerStats = player.GetComponent<PlayerStats>();
+       e = player.GetComponent<Entity>();
     }
 
     // Update is called once per frame
     void Update()
     {
-       attackSpeedText.text =  "Shoot Speed: " + playerStats.shootSpeed;
-        healthText.text = "HP: " + playerStats.currentHP + "/" + playerStats.maxHP;
+       attackSpeedText.text =  "Shoot Speed: " + e.attackSpeed;
+        healthText.text = "HP: " + e.currentHP + "/" + e.maxHP;
     }
 }

@@ -7,6 +7,13 @@ public class Entity : MonoBehaviour
 
     public float maxHP = 100;
     public float currentHP = 100;
+    public string entityName;
+
+
+    //MIGHT REMOVE LATER
+    public float attackSpeed;
+    public float range;
+    public float bulletForce;
 
     public void recieveDamage(float damage)
     {
