@@ -12,6 +12,7 @@ public class BulletScript : MonoBehaviour
     public GameObject textPrefab;
     public Entity sourceEntity;
 
+    /*
  void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collision");
@@ -33,10 +34,33 @@ public class BulletScript : MonoBehaviour
         else
         {
             Debug.Log("Poggers hit self");
+        }  
+        
+    }
+    */
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+       // Debug.Log("Collision");
+        if (collision.gameObject.GetComponent<Entity>().entityName.CompareTo(sourceEntity.entityName) != 0)
+        {
+            //if (collision.gameObject.tag.CompareTo("Enemy") == 0)
+            //{
+            Debug.Log("Hit Enemy");
+            // Debug.Log(collision.gameObject.GetComponent<EnemyStats>().currentHP);
+            collision.gameObject.GetComponent<Entity>().recieveDamage(damage);
+
+            GameObject text = Instantiate(textPrefab, transform.position, Quaternion.identity);
+            text.GetComponent<FloatingTextScript>().setText("" + damage);
+
+            // }
+
+            Destroy(gameObject);
         }
-        
-        
-        
+        else
+        {
+            Debug.Log("Poggers hit self");
+        }
     }
 
     void Update()
