@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(shootBegin());
+        StartCoroutine(shootBegin());
     }
 
     // Update is called once per frame
@@ -30,14 +30,14 @@ public class EnemyAI : MonoBehaviour
         bs.startPos = firePoint;
         bs.damage = 10f;
         bs.sourceEntity = gameObject.GetComponentInParent<Entity>();
-        rb.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
+        rb.AddForce(firePoint.up * bs.sourceEntity.bulletForce, ForceMode2D.Impulse);
     }
 
     public IEnumerator shootBegin()
     {
         while (true)
         {
-            //Debug.Log("Coroutine");
+            Debug.Log("Coroutine");
             Shoot();
             yield return new WaitForSeconds(1f);
         }

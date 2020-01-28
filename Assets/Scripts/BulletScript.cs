@@ -65,10 +65,17 @@ public class BulletScript : MonoBehaviour
 
     void Update()
     {
-        if(Vector2.Distance(startPos.position,transform.position) > range)
+        if (startPos == null)
         {
-            //Debug.Log("Destoryed from distance");
             Destroy(gameObject);
+        }
+        else
+        {
+            if (Vector2.Distance(startPos.position, transform.position) > range)
+            {
+                //Debug.Log("Destoryed from distance");
+                Destroy(gameObject);
+            }
         }
     }
 }
