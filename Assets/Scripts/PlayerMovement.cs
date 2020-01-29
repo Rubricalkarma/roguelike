@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Rigidbody2D rb;
     public Camera cam;
+    public Transform firePoint;
 
     Vector2 movement;
     Vector2 mousePos;
@@ -32,8 +33,9 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
         Vector2 lookDir = mousePos - rb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = angle;
-   
+        firePoint.rotation = Quaternion.Euler(0f,0f,angle);
+        //firePoint.transform.RotateAround(transform.position, firePoint.transform.up, angle);
+           
     }
 
 }
