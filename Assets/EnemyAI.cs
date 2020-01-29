@@ -7,7 +7,6 @@ public class EnemyAI : MonoBehaviour
     public Transform firePointPivot;
     public Transform firePoint;
     public GameObject bulletPrefab;
-    public Camera cam;
 
     public Entity target;
 
@@ -17,7 +16,7 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(shootBegin());
+        //StartCoroutine(shootBegin());
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
@@ -51,7 +50,7 @@ public class EnemyAI : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("Coroutine");
+            //Debug.Log("Coroutine");
             Shoot();
             yield return new WaitForSeconds(1f);
         }

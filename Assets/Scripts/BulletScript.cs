@@ -41,25 +41,23 @@ public class BulletScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-       // Debug.Log("Collision");
-        if (collision.gameObject.GetComponent<Entity>().entityName.CompareTo(sourceEntity.entityName) != 0)
+        //Debug.Log("Collision");
+        if (collision.gameObject.tag.CompareTo(sourceEntity.gameObject.tag) == 0)
         {
-            //if (collision.gameObject.tag.CompareTo("Enemy") == 0)
-            //{
-            Debug.Log("Hit Enemy");
-            // Debug.Log(collision.gameObject.GetComponent<EnemyStats>().currentHP);
-            collision.gameObject.GetComponent<Entity>().recieveDamage(damage);
-
-            GameObject text = Instantiate(textPrefab, transform.position, Quaternion.identity);
-            text.GetComponent<FloatingTextScript>().setText("" + damage);
-
-            // }
-
-            Destroy(gameObject);
+            //Debug.Log("Hit friendly");
         }
-        else
+        else if (!GameObject.ReferenceEquals(collision.gameObject, sourceEntity.gameObject))
         {
-            Debug.Log("Poggers hit self");
+
+            if (collision.gameObject.GetComponent<Entity>() != null)
+            {
+                Debug.Log("Hit Enemy");
+                collision.gameObject.GetComponent<Entity>().recieveDamage(damage);
+                GameObject text = Instantiate(textPrefab, transform.position, Quaternion.identity);
+                text.GetComponent<FloatingTextScript>().setText("" + damage);
+            }
+        
+            Destroy(gameObject);
         }
     }
 
