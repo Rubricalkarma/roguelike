@@ -9,6 +9,7 @@ public class BulletScript : MonoBehaviour
     public float range;
     public Transform startPos;
     public float damage;
+    public string damageType;
     public GameObject textPrefab;
     public Entity sourceEntity;
 
@@ -51,13 +52,33 @@ public class BulletScript : MonoBehaviour
 
             if (collision.gameObject.GetComponent<Entity>() != null)
             {
-                Debug.Log("Hit Enemy");
-                collision.gameObject.GetComponent<Entity>().recieveDamage(damage);
+               // Debug.Log("Hit Enemy");
+                Entity entityScript = collision.gameObject.GetComponent<Entity>();
+                float calculatedDamage = entityScript.CalculateDamage(damage, damageType);
+                entityScript.RecieveDamage(calculatedDamage);
+
+
                 GameObject text = Instantiate(textPrefab, transform.position, Quaternion.identity);
-                text.GetComponent<FloatingTextScript>().setText("" + damage);
+                FloatingTextScript textScript = text.GetComponent<FloatingTextScript>();
+                textScript.SetText("" + calculatedDamage);
+                textScript.SetColor(GetColor(damageType));
+                textScript.StartFloatText();
             }
         
             Destroy(gameObject);
+        }
+    }
+
+    Color GetColor(string damageType)
+    {
+        switch (damageType)
+        {
+            case "Physical": return Color.red;
+
+            case "Fire": return new Color(1f, .4f, 0, 1f);
+
+            default: Debug.LogError("Unknown damageType:" + damageType); return Color.white;
+               
         }
     }
 
@@ -71,7 +92,6 @@ public class BulletScript : MonoBehaviour
         {
             if (Vector2.Distance(startPos.position, transform.position) > range)
             {
-                //Debug.Log("Destoryed from distance");
                 Destroy(gameObject);
             }
         }

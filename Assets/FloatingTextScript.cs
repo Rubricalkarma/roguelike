@@ -8,20 +8,26 @@ public class FloatingTextScript : MonoBehaviour
 {
 
     public TextMeshProUGUI dmgText;
-    // Start is called before the first frame update
-    void Start()
-    {
-        StartCoroutine(fade());
-    }
-public void setText(string text)
+    public Color textColor = Color.red;
+
+public void SetText(string text)
     {
         dmgText.text = text;
     }
 
+    public void SetColor(Color color)
+    {
+        textColor = color;
+    }
+    public void StartFloatText()
+    {
+        StartCoroutine(fade());
+    }
+
     IEnumerator fade()
     {
-        
-
+        dmgText.color = textColor;
+       
         for(float i = 1f; i > 0; i -= .01f)
         {
             Color temp = dmgText.color;

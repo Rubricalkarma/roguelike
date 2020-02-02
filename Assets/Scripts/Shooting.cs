@@ -40,6 +40,7 @@ public class Shooting : MonoBehaviour
         bs.range = thisEntity.range;
         bs.startPos = firePoint;
         bs.damage = 10f;
+        bs.damageType = "Fire";
         bs.sourceEntity = gameObject.GetComponentInParent<Entity>();
         rb.AddForce(firePoint.up * thisEntity.bulletForce, ForceMode2D.Impulse);
     }
