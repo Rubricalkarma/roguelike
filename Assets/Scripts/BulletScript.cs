@@ -12,6 +12,7 @@ public class BulletScript : MonoBehaviour
     public string damageType;
     public GameObject textPrefab;
     public Entity sourceEntity;
+    public bool registered = false;
 
     /*
  void OnCollisionEnter2D(Collision2D collision)
@@ -42,30 +43,47 @@ public class BulletScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.Log("Collision");
+        //CHECKS IF HITTING FRIENDLY
         if (collision.gameObject.tag.CompareTo(sourceEntity.gameObject.tag) == 0)
         {
-            //Debug.Log("Hit friendly");
+
         }
+        //CHECKS IF HITTING ANYTHING BUT SELF
         else if (!GameObject.ReferenceEquals(collision.gameObject, sourceEntity.gameObject))
         {
-
+            //CHECKS IF HIT WAS AN ENTITY
             if (collision.gameObject.GetComponent<Entity>() != null)
             {
-               // Debug.Log("Hit Enemy");
-                Entity entityScript = collision.gameObject.GetComponent<Entity>();
-                float calculatedDamage = entityScript.CalculateDamage(damage, damageType);
-                entityScript.RecieveDamage(calculatedDamage);
+                //CHECKS IF BULLET HASN'T COLLIDED WITH ANYTHING
+                if (!registered)
+                {
+                    registered = true;
+                    // Debug.Log("Hit Enemy");
+                    Entity entityScript = collision.gameObject.GetComponent<Entity>();
+                    float calculatedDamage = entityScript.CalculateDamage(damage, damageType);
+
+                    if (entityScript.WillKill(calculatedDamage))
+                    {
+                        Debug.Log("Gain Exp");
+                        entityScript.Die();
+                        sourceEntity.GainExperience(200f);
+                    }
+                    else
+                    {
+                        entityScript.TakeDamage(calculatedDamage);
+                    }
 
 
-                GameObject text = Instantiate(textPrefab, transform.position, Quaternion.identity);
-                FloatingTextScript textScript = text.GetComponent<FloatingTextScript>();
-                textScript.SetText("" + calculatedDamage);
-                textScript.SetColor(GetColor(damageType));
-                textScript.StartFloatText();
+
+                    GameObject text = Instantiate(textPrefab, transform.position, Quaternion.identity);
+                    FloatingTextScript textScript = text.GetComponent<FloatingTextScript>();
+                    textScript.SetText("" + calculatedDamage);
+                    textScript.SetColor(GetColor(damageType));
+                    textScript.StartFloatText();
+                }
+
+                Destroy(gameObject);
             }
-        
-            Destroy(gameObject);
         }
     }
 
